@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+</head>
+
+<body>
+
+<div th:replace="header :: copy"></div>
+
+<div class="container">
+    <form action="/payment" method="post">
+
+        <div class="text-center" >
+            <h2>Checkout</h2>
+
+            <div class="name form-group">
+                <label for="name"> Name: </label>
+                <input type="text"  id="name" placeholder="Enter name"></input>
+            </div>
+
+            <div class="email form-group">
+                <label for="email"> Email: </label>
+                <input type="email" id="email" placeholder="Enter email address"></input>
+            </div>
+
+            <div class="phone form-group">
+                <label for="phone"> Phone number: </label>
+                <input type="text" id="phone" placeholder="Enter phone number"></input>
+            </div>
+        </div><br></br>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h4> Billing address: </h4>
+            </div>
+            <div class="col-md-4">
+                <h4> Shipping address: </h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 form-group">
+                <label for="billingcountry"> Country: </label>
+                <input type="text" id="billingcountry" placeholder="Enter the country"></input>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="shippingcountry"> Country: </label>
+                <input type="text" id="shippingcountry" placeholder="Enter country"></input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 form-group">
+                <label for="billingcity"> City: </label>
+                <input type="text" id="billingcity" placeholder="Enter city"></input>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="shippingcity"> City: </label>
+                <input type="text" id="shippingcity" placeholder="Enter city"></input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 form-group">
+                <label for="billingzipcode"> Zip code: </label>
+                <input type="text" id="billingzipcode" placeholder="Enter zip code"></input>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="shippingzipcode"> Zip code: </label>
+                <input type="text" id="shippingzipcode" placeholder="Enter zip code"></input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 form-group">
+                <label for="billingstreet"> Street address: </label>
+                <input type="text" id="billingstreet" placeholder="Enter street address"></input>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="shippingstreet"> Street address: </label>
+                <input type="text" id="shippingstreet" placeholder="Enter street address"></input>
+            </div>
+        </div><br></br>
+
+        <div class="text-center">
+            <button class="btn btn-info" type="submit"> Payment </button>
+        </div>
+    </form>
+
+
+
+
+</div>
+
+<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

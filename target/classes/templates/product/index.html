@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <script defer="defer" src="/js/index.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+</head>
+
+<body>
+
+<div th:replace="header :: copy"></div>
+
+<div class="container">
+
+    <div class="row list-group">
+        <div class="item col-xs-6 col-lg-6 ">
+            <a class="btn btn-info" href="/cart" th:unless="${user == null}"><img src="https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_shop_512px_GREY.png" width="50" height="50"/>
+                <strong class="cart" th:text="${lineitems.size()}">Number of Ordered Items</strong></a>
+        </div>
+        <div class="item col-xs-6 col-lg-6 text-right vcenter">
+            <strong th:unless="${user == null}">Logged in as <span th:text="${user.getName()}"></span></strong>
+            <a class="btn btn-info" data-toggle="modal" data-target="#register">Register</a>
+            <a class="btn btn-info" data-toggle="modal" data-target="#login" th:if="${user == null}">Login</a>
+            <a class="btn btn-info" href="/logout" th:unless="${user == null}">Logout</a>
+        </div>
+    </div>
+
+    <div class="well well-sm">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item active">
+                <a class="nav-link" id="home-tab" data-toggle="tab" href="#products" role="tab" aria-controls="home" aria-selected="true">All</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="home1-tab" data-toggle="tab" href="#boys" role="tab" aria-controls="home1" aria-selected="false"  th:text="${categories.get(0).getName()}">Category 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="home2-tab" data-toggle="tab" href="#girls" role="tab" aria-controls="home2" aria-selected="false" th:text="${categories.get(1).getName()}">Category 2</a>
+            </li>
+        </ul>
+    </div>
+    <div class="alert alert-success fade" role="alert">
+        <strong>Product added to cart</strong>
+    </div>
+    <div class="tab-content" id="myTabcontent">
+        <div class="tab-pane active" id="products" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row list-group">
+                <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
+                    <div class="thumbnail">
+                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
+                            <p class="group inner list-group-item-text" th:text="${prod.description}">Product description... </p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <a class="btn btn-success addButton" th:attr="data-id=${prod.getId()}" th:if="${user == null}" disabled="disabled">Add to cart</a>
+                                    <a class="btn btn-success addButton" th:attr="data-id=${prod.getId()}" th:unless="${user == null}">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="boys" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row list-group">
+                <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${boys}">
+                    <div class="thumbnail">
+                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
+                            <p class="group inner list-group-item-text" th:text="${prod.description}">Product description... </p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <a class="btn btn-success addButton" th:attr="data-id=${prod.getId()}" th:if="${user == null}" disabled="disabled">Add to cart</a>
+                                    <a class="btn btn-success addButton" th:attr="data-id=${prod.getId()}" th:unless="${user == null}">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="girls" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row list-group">
+                <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${girls}">
+                    <div class="thumbnail">
+                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
+                            <p class="group inner list-group-item-text" th:text="${prod.description}">Product description... </p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <a class="btn btn-success addButton" th:attr="data-id=${prod.getId()}" th:if="${user == null}" disabled="disabled">Add to cart</a>
+                                    <a class="btn btn-success addButton" th:attr="data-id=${prod.getId()}" th:unless="${user == null}">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="registerLabel">Register Form</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="warning" id="registerWarning"></p>
+                    <form id="registerForm" action="/register" method="POST">
+                        <div class="form-group">
+                            <label for="userName"> User Name </label>
+                            <input type="text"  class="form-control" name="username" id="userName" placeholder="Enter Your Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"> Email </label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter Your Email Address"/>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"> Password </label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password2"> Password again </label>
+                            <input type="password" class="form-control" id="password2" placeholder="Password again"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="signUpButton" type="button" class="btn btn-info">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="loginLabel">Log In Form</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="warning" id="loginWarning"></p>
+                    <form id="loginForm" action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="userName"> User Name </label>
+                            <input type="text"  class="form-control" name="loginUsername" id="loginUserName" placeholder="Enter Your Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"> Password </label>
+                            <input type="password" class="form-control" name="loginPassword" id="loginPassword" placeholder="Password"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="loginButton" type="button" class="btn btn-info">Log In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

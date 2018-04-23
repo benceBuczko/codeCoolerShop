@@ -1,0 +1,71 @@
+    <!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <script src="/js/cart.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+</head>
+
+<body>
+
+<div th:replace="header :: copy"></div>
+
+<div class="container">
+    <form action="/checkout" method="post">
+
+    <table class="table">
+        <tr>
+            <th> Name </th>
+            <th> Unit Price </th>
+            <th> Quantity </th>
+            <th> Total Price </th>
+        </tr>
+        <tr th:each="prod, iterStat : ${lineitems}">
+            <td th:text="${prod.getName()}" > Name </td>
+            <td th:text="${prod.getPrice()}"> Unit Price </td>
+            <td> <input th:name="${prod.getId()} + quantity" th:attr="data-price=${prod.getPrice()}" type="number" min="1" th:value="${prod.getQuantity()}"></input><a class="btn deleteButton" th:attr="data-id=${prod.getId()}"><img src="https://image.flaticon.com/icons/png/128/61/61848.png" width="20" height="20"></img></a></td>
+            <td class="totalPrice" th:text="${prod.getPrice()*prod.getQuantity()}"> Total Price </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total Price</td>
+            <td id="totalPrice"></td>
+        </tr>
+    </table>
+    <a id="submitButton" class="btn btn-info">Checkout</a>
+        <a class="btn btn-info" href="/">Back</a>
+    </form>
+
+
+
+
+</div>
+
+<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <script defer="defer" src="/js/payment.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+</head>
+
+<body>
+
+<div th:replace="header :: copy"></div>
+
+<div class="container">
+    <form action="/confirmation" method="post">
+        <div class="text-center">
+        <h1>Choose a payment method</h1>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Credit Card</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="cardholder-name"> Carholder Name </label>
+                                <input type="text" id="cardholder-name" placeholder="Enter cardholder name"></input>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="card-number"> Card number </label>
+                                <input class="numbersOnly" type="text" id="card-number" maxlength="4" size="4"/>-
+                                <input class="numbersOnly" type="text" id="card-number2" maxlength="4" size="4"/>-
+                                <input class="numbersOnly" type="text" id="card-number3" maxlength="4" size="4"/>-
+                                <input class="numbersOnly" type="text" id="card-number4" maxlength="4" size="4"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="month"> Expiry Date </label>
+                                <input type="month" id="month"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="code"> CVV </label>
+                                <input class="numbersOnly" type="text" id="code" placeholder="CVV" size="3" maxlength="3" />
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/MasterCard_early_1990s_logo.svg/200px-MasterCard_early_1990s_logo.svg.png" width="100" height="50"/>
+                                <img src="https://cdn4.iconfinder.com/data/icons/payment-method/160/payment_method_card_visa-512.png" width="100" height="50"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Paypal</a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="username"> Username </label>
+                                <input type="text" id="username" placeholder="Enter paypal username"></input>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password"> Paypal password </label>
+                                <input type="password" id="password" placeholder="Enter paypal password"></input>
+                            </div>
+                            <img src="https://d2mckvlpm046l3.cloudfront.net/5c2fb277527c818d3b2ab78e815b46bb3b92078c/http%3A%2F%2Fnobcontrol.com%2Fsites%2Fall%2Fthemes%2Fbootstrap_subtheme%2Fimages%2Fpaypal-payment-option.png" width="250" heigth="100"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="btn btn-info" type="submit"> Pay </button>
+        </div>
+    </form>
+
+</div>
+
+<div th:replace="footer :: copy"></div>
+
+</body>
+</html>
